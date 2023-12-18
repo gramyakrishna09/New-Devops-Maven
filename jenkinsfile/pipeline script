@@ -1,10 +1,10 @@
 pipeline {
     agent any
     stages {
-        stage('compile and clean') {
+        stage('build') {
             steps {
             
-                sh "mvn clean compile"
+                sh "mvn clean"
             }
         }
         stage('Test') {
@@ -19,3 +19,27 @@ pipeline {
         }
     }
 }
+
+
+pipeline {
+    agent any
+    stages {
+        stage('clone Repository and clean') {
+            steps {
+                sh "rm -rf new-devops-maven"
+                sh "git clone https://github.com/gramyakrishna09/new-devops-maven.git"
+            }
+        }
+        stage('Test') {
+            steps {
+               echo "texting"            
+            }
+        }
+        stage('Deploy') {
+            steps {
+                 echo "deploying"
+            }
+        }
+    }
+}
+
